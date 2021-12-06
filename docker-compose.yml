@@ -1,0 +1,15 @@
+services:
+  control:
+    build:
+      context: .
+    tty: true
+    volumes:
+      - managed:/manage
+  manage:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    volumes:
+      - managed:/manage
+volumes:
+  managed: null

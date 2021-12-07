@@ -10,10 +10,13 @@ services:
       - 'managed:/manage'
       - './lab:/lab'
   manage:
+    &manage
     build:
       context: ./node
       dockerfile: Dockerfile
     volumes:
       - managed:/manage
+  manage1: *manage
+  manage2: *manage
 volumes:
   managed: null

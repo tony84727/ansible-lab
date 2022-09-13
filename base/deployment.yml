@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vm
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vm
+  template:
+    metadata:
+      labels:
+        app: vm
+    spec:
+      containers:
+        - name: vm
+          image: ghcr.io/tony84727/ansible-lab/node/alpine

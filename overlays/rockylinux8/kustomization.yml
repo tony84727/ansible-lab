@@ -1,0 +1,5 @@
+bases:
+  - ../../base
+images:
+  - name: ghcr.io/tony84727/ansible-lab/node/alpine
+    newName: ghcr.io/tony84727/ansible-lab/node/rockylinux8

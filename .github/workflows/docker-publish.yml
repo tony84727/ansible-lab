@@ -24,6 +24,14 @@ jobs:
     permissions:
       contents: read
       packages: write
+    strategy:
+      matrix:
+        include:
+          - variant: rockylinux8
+            context: node/rockylinux8
+          - variant: alpine
+            context: node/
+
 
     steps:
       - name: Checkout repository
@@ -41,7 +49,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.variant }}
           tags: |
             type=raw,value=ci-${{ github.run_number }}
             type=raw,value=latest,enable=${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
@@ -54,4 +62,4 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          context: node
+          context: ${{ matrix.context }}

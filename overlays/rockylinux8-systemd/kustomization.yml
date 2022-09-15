@@ -1,0 +1,4 @@
+bases:
+  - ../rockylinux8
+patches:
+  - systemd-deployment.yml

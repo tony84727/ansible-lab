@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vm
+spec:
+  template:
+    spec:
+      containers:
+        - name: vm
+          command:
+            - /sbin/init
+          volumeMounts:
+            - name: cgroup
+              readOnly: true
+              mountPath: /sys/fs/cgroup
+            - name: run
+              mountPath: /run
+      volumes:
+        - name: cgroup
+          hostPath:
+            path: /sys/fs/cgroup
+            type: Directory
+        - name: run
+          emptyDir:
+            medium: Memory
